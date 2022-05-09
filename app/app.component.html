@@ -1,0 +1,35 @@
+<button (click)="setRange('D')">D</button>
+<button (click)="setRange('W')">W</button>
+<button (click)="setRange('1 M')">1 M</button>
+<button (click)="setRange('6 M')">6 M</button>
+<button (click)="setRange('1 Y')">1 Y</button>
+<button (click)="setRange('All')">All</button>
+
+<ngx-charts-bar-vertical-stacked
+  [view]="view"
+  [customColors]="barCustomColors"
+  [results]="multi"
+  [gradient]="gradient"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [xAxisTickFormatting]="dateTickFormatting"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [animations]="animations"
+  [legendPosition]="'below'"
+  (select)="onSelect($event)"
+>
+  <ng-template #tooltipTemplate let-model="model">
+    <!-- fields are series/name/value -->
+    <div class="tt">
+      {{ model.series }}
+      | {{ model.name }} |count: {{ model.value }}
+      <div *ngFor="let d of model.data; let i = index">
+        {{ i + 1 }}. {{ d.title }}:{{ d.status }}
+      </div>
+    </div>
+  </ng-template>
+</ngx-charts-bar-vertical-stacked>
